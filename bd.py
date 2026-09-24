@@ -1,6 +1,6 @@
-"""Módulo de acesso à base de dados SQLite da aplicação.
+#Módulo de acesso à base de dados SQLite da aplicação.
 
-Este ficheiro define o caminho da base de dados, o esquema das tabelas e o
+"""Este ficheiro define o caminho da base de dados, o esquema das tabelas e o
 contexto de ligação que garante que as operações são validadas e fechadas
 corretamente.
 """
@@ -35,9 +35,9 @@ CREATE TABLE IF NOT EXISTS movimentos (
 
 @contextmanager
 def ligacao():
-    """Abre uma ligação SQLite e garante commit/rollback no fim.
+    #Abre uma ligação SQLite e garante commit/rollback no fim.
 
-    O bloco ``with ligacao() as con`` garante que:
+    """O bloco ``with ligacao() as con`` garante que:
     - a ligação fica aberta durante a operação;
     - os dados são guardados se tudo correr bem;
     - tudo é anulado em caso de erro;
@@ -54,7 +54,7 @@ def ligacao():
 
 
 def criar_tabelas():
-    """Cria as tabelas do sistema, se ainda não existirem."""
+    #Cria as tabelas do sistema, se ainda não existirem.
     with ligacao() as con:
         con.executescript(ESQUEMA)
 

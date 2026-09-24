@@ -1,6 +1,6 @@
-"""Interface principal da aplicação de gestão de stock.
+#Interface principal da aplicação de gestão de stock.
 
-Este módulo apresenta o menu ao utilizador e chama as funções do módulo
+"""Este módulo apresenta o menu ao utilizador e chama as funções do módulo
 stock.py para consultar, inserir e movimentar produtos.
 """
 
@@ -11,7 +11,7 @@ import stock
 
 
 def ler_inteiro(pergunta, minimo=None):
-    """Lê um número inteiro e valida o mínimo permitido."""
+    #Lê um número inteiro e valida o mínimo permitido.
     while True:
         texto = input(pergunta).strip()
         try:
@@ -26,7 +26,7 @@ def ler_inteiro(pergunta, minimo=None):
 
 
 def ler_preco(pergunta):
-    """Lê um preço em formato português ou americano, por exemplo 12,50 ou 12.50."""
+    #Lê um preço em formato português ou americano, por exemplo 12,50 ou 12.50.
     while True:
         texto = input(pergunta).strip().replace(",", ".")
         try:
@@ -36,13 +36,13 @@ def ler_preco(pergunta):
 
 
 def euros(valor):
-    """Converte um número em texto monetário com duas casas decimais e separador de milhar."""
+    #Converte um número em texto monetário com duas casas decimais e separador de milhar.
     texto = f"{valor:,.2f}"
     return texto.replace(",", " ").replace(".", ",")
 
 
 def listar():
-    """Mostra a listagem de produtos em stock com código, nome e quantidade."""
+    #Mostra a listagem de produtos em stock com código, nome e quantidade.
     produtos = stock.listar_produtos()
     if not produtos:
         print("Ainda não há produtos.")
@@ -53,7 +53,7 @@ def listar():
 
 
 def novo_produto():
-    """Cria um novo produto com código, nome, preço e nível mínimo."""
+    #Cria um novo produto com código, nome, preço e nível mínimo.
     codigo = input("Código: ")
     nome = input("Nome: ")
     preco = ler_preco("Preço: ")
@@ -63,7 +63,7 @@ def novo_produto():
 
 
 def movimento(tipo):
-    """Regista uma entrada ou saída de stock de um produto específico."""
+    #Regista uma entrada ou saída de stock de um produto específico.
     produto = stock.procurar(input("Código: "))
     if produto is None:
         print("Esse código não existe. Usa a opção 1.")
@@ -77,7 +77,7 @@ def movimento(tipo):
 
 
 def alertas():
-    """Mostra os produtos que estão no mínimo ou abaixo dele."""
+    #Mostra os produtos que estão no mínimo ou abaixo dele.
     lista = stock.em_falta()
     if not lista:
         print("Nenhum produto abaixo do mínimo.")
@@ -86,7 +86,7 @@ def alertas():
 
 
 def historico():
-    """Mostra os últimos movimentos de um produto dado o seu código."""
+    #Mostra os últimos movimentos de um produto dado o seu código.
     codigo = input("Código: ")
     linhas = stock.movimentos(codigo)
     if not linhas:
@@ -98,7 +98,7 @@ def historico():
 
 
 def mostrar_relatorio():
-    """Apresenta um relatório de stock com quantidade e valor total."""
+    #Apresenta um relatório de stock com quantidade e valor total.
     linhas, total = stock.relatorio()
     baixo = 0
     print("RELATÓRIO DE STOCK")
@@ -118,7 +118,7 @@ def mostrar_relatorio():
 
 
 def main():
-    """Executa o menu principal da aplicação."""
+    #Executa o menu principal da aplicação.
     bd.criar_tabelas()
     if stock.carregar_exemplo():
         print("Loja nova: 5 produtos de exemplo.")

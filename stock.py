@@ -1,6 +1,6 @@
-"""Lógica de negócio da gestão de stock.
+#Lógica de negócio da gestão de stock.
 
-Este módulo não lê input nem imprime mensagens: apenas recebe dados, valida
+"""Este módulo não lê input nem imprime mensagens: apenas recebe dados, valida
 regras e devolve resultados ao módulo de interface (app.py).
 """
 
@@ -42,7 +42,7 @@ def adicionar_produto(codigo, nome, preco, minimo=0):
     return cur.lastrowid
 
 def procurar(codigo):
-    """Devolve um produto pelo código, ou None se não existir."""
+    #Devolve um produto pelo código, ou None se não existir.
     with ligacao() as con:
         return con.execute(
             "SELECT * FROM produtos WHERE codigo = ?",
@@ -50,7 +50,7 @@ def procurar(codigo):
         ).fetchone()
 
 def listar_produtos():
-    """Devolve todos os produtos ordenados por código."""
+    #Devolve todos os produtos ordenados por código.
     with ligacao() as con:
         return con.execute(
             "SELECT * FROM produtos ORDER BY codigo"
@@ -103,7 +103,7 @@ def registar_movimento(codigo, tipo, quantidade, nota=""):
     return novo_stock
 
 def em_falta():
-    """Devolve os produtos com stock igual ou abaixo do mínimo."""
+    #Devolve os produtos com stock igual ou abaixo do mínimo.
     with ligacao() as con:
         return con.execute(
             "SELECT codigo, nome, stock, minimo FROM produtos "
@@ -111,7 +111,7 @@ def em_falta():
         ).fetchall()
 
 def movimentos(codigo, limite=5):
-    """Devolve os últimos movimentos de um produto, do mais recente para o mais antigo."""
+    #Devolve os últimos movimentos de um produto, do mais recente para o mais antigo.
     with ligacao() as con:
         return con.execute(
             "SELECT m.data, m.tipo, m.quantidade, m.nota "
@@ -122,7 +122,7 @@ def movimentos(codigo, limite=5):
         ).fetchall()
 
 def relatorio():
-    """Devolve as linhas do relatório e o valor total em stock."""
+    #Devolve as linhas do relatório e o valor total em stock.
     with ligacao() as con:
         linhas = con.execute(
             "SELECT codigo, nome, stock, minimo, "
@@ -132,7 +132,7 @@ def relatorio():
     return linhas, total
 
 PRODUTOS = [
-    # código, nome, preço, mínimo, stock inicial
+    #Código, nome, preço, mínimo, stock inicial.
     ("RATO-01", "Rato sem fios", 14.90, 5, 12),
     ("TECL-02", "Teclado USB", 20.00, 5, 3),
     ("PEN-64", "Pen USB 64 GB", 9.50, 8, 0),
@@ -141,7 +141,7 @@ PRODUTOS = [
 ]
 
 def carregar_exemplo():
-    """Cria os produtos de exemplo se a loja estiver vazia."""
+    #Cria os produtos de exemplo se a loja estiver vazia.
     if listar_produtos():
         return False
     for codigo, nome, preco, minimo, inicial in PRODUTOS:
