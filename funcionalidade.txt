@@ -1,0 +1,6 @@
+Registar produtos com código único, nome, preço e stock mínimo.
+Registar entradas (compras ao fornecedor) e saídas (vendas).
+Nunca deixar o stock ficar negativo.
+Guardar o histórico de todos os movimentos, com data e nota.
+Mostrar os produtos que estão no stock mínimo ou abaixo, para encomendar.
+Mostrar um relatório com a quantidade e o valor do stock.
