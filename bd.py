@@ -1,4 +1,4 @@
-#Módulo de acesso à base de dados SQLite da aplicação.
+# Módulo de acesso à base de dados SQLite da aplicação.
 
 """Este ficheiro define o caminho da base de dados, o esquema das tabelas e o
 contexto de ligação que garante que as operações são validadas e fechadas
@@ -35,15 +35,23 @@ CREATE TABLE IF NOT EXISTS movimentos (
 
 @contextmanager
 def ligacao():
-    """O bloco ``with ligacao() as con`` garante que:
-    - a ligação fica aberta durante a operação;
-    - os dados são guardados se tudo correr bem;
-    - tudo é anulado em caso de erro;
-    - a ligação fechada mesmo se ocorrer exceção.
+    """Cria uma ligação à base de dados SQLite.
+
+    A ligação é utilizada como um gestor de contexto através de
+    ``with ligacao() as con``. Desta forma, as operações são confirmadas
+    quando terminam corretamente e anuladas caso ocorra uma exceção.
+
+    Yields:
+        sqlite3.Connection: ligação ativa à base de dados.
+
+    Raises:
+        sqlite3.Error: se ocorrer um erro durante a ligação ou durante
+            uma operação na base de dados.
     """
     con = sqlite3.connect(DB_PATH)
     con.row_factory = sqlite3.Row
     con.execute("PRAGMA foreign_keys = ON")
+
     try:
         with con:
             yield con
@@ -52,17 +60,24 @@ def ligacao():
 
 
 def criar_tabelas():
-    #Cria as tabelas do sistema, se ainda não existirem.
+    """Cria as tabelas da aplicação caso ainda não existam.
+
+    A função executa o esquema definido na constante ``ESQUEMA``.
+    Se as tabelas já existirem, não são recriadas nem alteradas.
+
+    Returns:
+        None.
+    """
     with ligacao() as con:
         con.executescript(ESQUEMA)
 
 
-
-
 criar_tabelas()
+
 with ligacao() as con:
     tabelas = con.execute(
         "SELECT name FROM sqlite_master WHERE type = 'table'"
     ).fetchall()
+
 print("Base de dados:", DB_PATH)
 print("Tabelas:", ", ".join(t["name"] for t in tabelas))
