@@ -145,7 +145,7 @@ def main():
             elif opcao == "7":
                 mostrar_relatorio()
             elif opcao == "0":
-                print("Até amanhã!")
+                print("Adeus!")
                 break
             else:
                 print("Opção inválida.")
