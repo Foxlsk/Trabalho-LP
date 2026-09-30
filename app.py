@@ -10,10 +10,10 @@ import bd
 import stock
 
 
-def ler_inteiro(pergunta, minimo=None):
+def ler_inteiro(var, minimo=None):
     #Lê um número inteiro e valida o mínimo permitido.
     while True:
-        texto = input(pergunta).strip()
+        texto = input(var).strip()
         try:
             valor = int(texto)
         except ValueError:
@@ -25,10 +25,10 @@ def ler_inteiro(pergunta, minimo=None):
             return valor
 
 
-def ler_preco(pergunta):
-    #Lê um preço em formato português ou americano, por exemplo 12,50 ou 12.50.
+def ler_preco(num):
+    #Lê uma string e troca "," por "." e retorna um float.
     while True:
-        texto = input(pergunta).strip().replace(",", ".")
+        texto = input(num).strip().replace(",", ".")
         try:
             return float(texto)
         except ValueError:
@@ -42,7 +42,7 @@ def euros(valor):
 
 
 def listar():
-    #Mostra a listagem de produtos em stock com código, nome e quantidade.
+    #printa a listagem de produtos em stock com código, nome e quantidade.
     produtos = stock.listar_produtos()
     if not produtos:
         print("Ainda não há produtos.")

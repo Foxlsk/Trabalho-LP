@@ -42,7 +42,7 @@ def adicionar_produto(codigo, nome, preco, minimo=0):
     return cur.lastrowid
 
 def procurar(codigo):
-    #Devolve um produto pelo código, ou None se não existir.
+    #Devolve um produto pelo código,
     with ligacao() as con:
         return con.execute(
             "SELECT * FROM produtos WHERE codigo = ?",

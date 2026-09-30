@@ -35,8 +35,6 @@ CREATE TABLE IF NOT EXISTS movimentos (
 
 @contextmanager
 def ligacao():
-    #Abre uma ligação SQLite e garante commit/rollback no fim.
-
     """O bloco ``with ligacao() as con`` garante que:
     - a ligação fica aberta durante a operação;
     - os dados são guardados se tudo correr bem;
